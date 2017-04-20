@@ -7,7 +7,7 @@ export default class Card extends Component {
       return(
         <a className="card" href={cardInfo.url} target="_blank">
           <div className="card_image" >
-            <img src={cardInfo.thumbnailUrl} alt={cardInfo.title} className="width100 card_img"/>
+            <img src={cardInfo.thumbnail_url} alt={cardInfo.title} className="width100 card_img"/>
           </div>
           <div className="borderTop">
           <div className="card_text">

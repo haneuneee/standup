@@ -4,12 +4,11 @@ import './App.css';
 import FirebaseDao from './FirebaseDao'
 import Editor from './Editor.js'
 import config from './config'
-console.log(config);
-
+console.log(config)
 class App extends Component {
   constructor(){
     super();
-    this.dao = new FirebaseDao(config);
+    this.dao = new FirebaseDao(config.firebaseConfig);
     this.submit = this.submit.bind(this);
     this.state = {
       "articles": []
@@ -29,7 +28,6 @@ class App extends Component {
   for(let i=0;i<this.state.articles.length;i++){
     lis.push(<li key={this.state.articles[i].key}>{this.state.articles[i].content}</li>);
   }
-    console.log(lis)
   return lis;
 }
   render() {
