@@ -6,11 +6,13 @@ import Editor from './Editor.js'
 class App extends Component {
   constructor(){
     super();
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
-  handleSubmit(e){
-    console.log(this,e);
+  submit(content){
+    if(content){
+      console.log(content);
+    }
   }
 
   render() {
