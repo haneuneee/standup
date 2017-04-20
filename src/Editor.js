@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Editor.css';
 import Profile from './Profile';
+import Article from './Article';
 class Editor extends Component {
   constructor(props){
     super(props);
@@ -15,6 +16,7 @@ class Editor extends Component {
       content : undefined
     }
   }
+
   onPaste(event){
     event.clipboardData.items[0].getAsString(text=>{
       if(this.detectURL(text)){
@@ -24,9 +26,7 @@ class Editor extends Component {
   }
   editorChange(event){
     let checkText = this.detectURL(event.currentTarget.textContent);
-    if(!this.state.embedlyUrl&&
-        (event.keyCode===32||event.keyCode===13)&&
-        checkText){
+    if(!this.state.embedlyUrl&&(event.keyCode===32||event.keyCode===13)&&checkText){
       this.setState({embedlyUrl:checkText,content:event.currentTarget.textContent});
     }else{
       this.setState({content:event.currentTarget.textContent});
@@ -47,8 +47,12 @@ class Editor extends Component {
     else return false;
   }
   handleSubmit(event){
-    this.props.submit(this.state.content);
-  }
+  let article = Object.assign({}, Article());
+  article.user = "Genji";
+  article.content = this.state.content;
+  article.urls[0].url = this.state.embedlyUrl;
+  this.props.handleSubmit(article);
+}
   detectURL(text){
     var urls = text.match(/(https?:\/\/[^\s]+)/g)||text.match(/(www.[^\s]+)/g);
     if(urls){
@@ -75,6 +79,5 @@ class Editor extends Component {
         </div>
       </div>
     );
-  }
-}
+  }}
 export default Editor;
